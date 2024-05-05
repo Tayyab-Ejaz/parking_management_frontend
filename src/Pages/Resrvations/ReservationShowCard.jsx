@@ -17,7 +17,7 @@ const ReservationCard = ({ reservation, onUpdateStatus, onDeleteReservation }) =
     <Card sx={{ marginBottom: 2, width: "100%" }}>
       <CardContent>
         <Grid container>
-          <Grid item xs={10}>
+          <Grid item md={10} xs={12}>
             <Typography variant="h6">
               Parking Slot: {parking_slot?.description}
             </Typography>
@@ -32,7 +32,7 @@ const ReservationCard = ({ reservation, onUpdateStatus, onDeleteReservation }) =
 
             {isAdmin() && <Typography>Username: {user.name}</Typography>}
           </Grid>
-          <Grid item xs={2}>
+          <Grid item md={2} xs={12}>
             {!["checked_in", "cancelled", "checked_out"].find(
               (st) => st == status
             ) && (

@@ -1,66 +1,94 @@
-import React, { useEffect, useState } from "react";
-import useAuth from "../Hooks/useAuth";
+import React, { useState, useEffect } from "react";
+import { Container, Box, TextField, Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { Container } from "@mui/material";
-import useAxiosInstance from "../Hooks/axiosInstance";
+import useAuth from "../Hooks/useAuth";
 import { useAlert } from "../Contexts/AlertContext";
+import useAxiosInstance from "../Hooks/axiosInstance";
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
   const { user, login, isAdmin } = useAuth();
   const navigate = useNavigate();
   const axiosInstance = useAxiosInstance();
-  const {showAlert} = useAlert();
+  const { showAlert } = useAlert();
 
-  if (user) {
-    if(isAdmin()) {
-      navigate("/admin/slots");
-    } else {
-      navigate("/slots");
+  useEffect(() => {
+    if (user) {
+      if (isAdmin()) {
+        navigate("/admin/slots");
+      } else {
+        navigate("/slots");
+      }
     }
-  }
+  }, [user, isAdmin, navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const response = await axiosInstance
-      .post("/login", {
+    setLoading(true);
+    try {
+      const response = await axiosInstance.post("/login", {
         user: { email, password },
-      })
-      .catch((error) => {
-        console.log("Error", error.message);
       });
 
-    if (response?.status === 200) {
-      login(response.data.data.user);
-    } else {
-      showAlert(`Email or Paassword is invalid.`)
+      if (response.status === 200) {
+        login(response.data.data.user);
+        setLoading(false);
+        if (isAdmin()) {
+          navigate("/admin/slots");
+        } else {
+          navigate("/slots");
+        }
+      }
+    } catch (error) {
+      setLoading(false);
+      showAlert(
+        `Email or password is invalid. ${
+          error.response ? error.response.data.message : error.message
+        }`,
+        "error"
+      );
     }
   };
 
   return (
-    <Container>
-      <h1>Login</h1>
+    <Container maxWidth="sm">
+      <Typography variant="h4" component="h1" gutterBottom>
+        Login
+      </Typography>
       <form onSubmit={handleLogin}>
-        <div>
-          <label>Email</label>
-          <input
+        <Box mb={2}>
+          <TextField
+            fullWidth
+            label="Email"
+            variant="outlined"
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </div>
-        <div>
-          <label>Password</label>
-          <input
+        </Box>
+        <Box mb={2}>
+          <TextField
+            fullWidth
+            label="Password"
+            variant="outlined"
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </div>
-        <button type="submit">Login</button>
+        </Box>
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          fullWidth
+          disabled={loading}
+        >
+          {loading ? "Logging in..." : "Login"}
+        </Button>
       </form>
     </Container>
   );

@@ -35,7 +35,7 @@ const Header = () => {
     <AppBar position="static">
       <Toolbar>
         <Typography variant="h6" sx={{ flexGrow: 1 }}>
-          Parking Management System
+          <Link to="/" style={{textDecoration: "none", color: "white"}}>Parking Management System</Link>
         </Typography>
 
         {/* Hamburger menu for mobile */}
@@ -56,12 +56,7 @@ const Header = () => {
             onClose={handleMenuClose}
             keepMounted
           >
-            <MenuItem component={Link} to="/" onClick={handleMenuClose}>
-              Home
-            </MenuItem>
-            <MenuItem component={Link} to="/about" onClick={handleMenuClose}>
-              About
-            </MenuItem>
+       
             {user ? (
               <>
                 {isAdmin() && (
@@ -101,6 +96,13 @@ const Header = () => {
                     >
                       Parking Slots
                     </MenuItem>
+                    <MenuItem
+                      component={Link}
+                      to="/reservations"
+                      onClick={handleMenuClose}
+                    >
+                      My reservations
+                    </MenuItem>                    
                   </>
                 )}
 

@@ -137,12 +137,12 @@ const AdminParkingSlotsIndex = () => {
         </Typography>
       </Box>
       <Grid container spacing={2} className="">
-        <Grid item xs={2}>
+        <Grid item md={2} xs={12}>
           <ParkingSlotFilters
             onFilterChange={(updatedFilters) => setFilters(updatedFilters)}
           />
         </Grid>
-        <Grid item xs={10}>
+        <Grid item md={10} xs={12}>
           <Box py={5}>
             <>
               <CustomPagination
