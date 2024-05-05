@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 
 import useAxiosInstance from "../../Hooks/axiosInstance";
@@ -14,13 +13,23 @@ import {
 } from "@mui/material";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import useAuth from "../../Hooks/useAuth";
 
-// ParkingSlotFilters component with improved validation
+const addMinutes = (date, minutes) => {
+  const newDate = new Date(date);
+  newDate.setMinutes(date.getMinutes() + minutes);
+  return newDate;
+};
+
 const ParkingSlotFilters = ({ onFilterChange }) => {
   const [carTypes, setCarTypes] = useState([]);
+  const { isAdmin } = useAuth();
+  
+  const startDefault = new Date();
+  const endDefault = addMinutes(startDefault, 60);
   const [filters, setFilters] = useState({
-    startTime: null,
-    endTime: null,
+    startTime: isAdmin() ? null : startDefault,
+    endTime: isAdmin() ? null : endDefault,
     disabledOnly: false,
     hasShade: false,
     selectedCarTypes: [],
@@ -28,7 +37,6 @@ const ParkingSlotFilters = ({ onFilterChange }) => {
   const axiosInstance = useAxiosInstance();
 
   useEffect(() => {
-    // Fetch available car types from the backend
     axiosInstance
       .get("/car_types")
       .then((response) => {
@@ -55,6 +63,10 @@ const ParkingSlotFilters = ({ onFilterChange }) => {
     setFilters(updatedFilters);
     onFilterChange(updatedFilters);
   };
+
+  useEffect(() => {
+    handleFilterChange();
+  }, []);
 
   return (
     <Box className="filter-section">

@@ -81,6 +81,14 @@ const Header = () => {
                     >
                       Manage Customers
                     </MenuItem>
+
+                    <MenuItem
+                      component={Link}
+                      to="/reservations"
+                      onClick={handleMenuClose}
+                    >
+                      Manage Reservations
+                    </MenuItem>
                   </>
                 )}
 
@@ -142,20 +150,28 @@ const Header = () => {
                   >
                     Manage Customers
                   </Button>
+
+                  <Button
+                    color="inherit"
+                    component={Link}
+                    to="/reservations"
+                  >
+                    Manage Reservations
+                  </Button>
                 </>
               )}
-              
+
               {!isAdmin() && (
                 <>
                   <Button color="inherit" component={Link} to="/slots">
                     Parking Slots
                   </Button>
+                  <Button color="inherit" component={Link} to="/reservations">
+                    My reservations
+                  </Button>
                 </>
               )}
 
-              <Button color="inherit" component={Link} to="/reservations">
-                My reservations
-              </Button>
               <Button color="inherit" onClick={handleLogout}>
                 Logout
               </Button>

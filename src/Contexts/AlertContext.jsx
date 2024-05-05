@@ -5,7 +5,7 @@ const AlertContext = createContext();
 export const AlertProvider = ({ children }) => {
   const [alert, setAlert] = useState({
     message: '',
-    severity: 'info', // Severity can be "success", "error", "info", "warning"
+    severity: 'info',
     open: false,
   });
 

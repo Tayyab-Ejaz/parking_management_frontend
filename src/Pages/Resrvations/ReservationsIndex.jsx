@@ -45,7 +45,7 @@ const ReservationsIndex = () => {
       await axiosInstance.delete(`/reservations/${reservation.id}`);
       fetchReservations(pagination.currentPage); 
     } catch (error) {
-      console.error('Failed to cancel reservation:', error.message);
+      console.error('Failed to cancel reservation:', "error");
     }
   };
 

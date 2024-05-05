@@ -59,7 +59,7 @@ const ParkingSlotsIndex = () => {
       navigate("/reservations");
       setModalOpen(false);
     } catch (error) {
-      showAlert("Failed to book reservation:", error.message)
+      showAlert("Failed to book reservation:", "error")
     }
   };
 
@@ -80,7 +80,7 @@ const ParkingSlotsIndex = () => {
         },
       });
 
-      setParkingSlots(response.data.parking_slots);
+      setParkingSlots(response.data.parking_slots || []);
       setPagination({
         currentPage: response.data.current_page,
         totalPages: response.data.total_pages,

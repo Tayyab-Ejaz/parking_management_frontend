@@ -8,13 +8,17 @@ import { useAlert } from "../Contexts/AlertContext";
 const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { user, login } = useAuth();
+  const { user, login, isAdmin } = useAuth();
   const navigate = useNavigate();
   const axiosInstance = useAxiosInstance();
   const {showAlert} = useAlert();
 
   if (user) {
-    navigate("/");
+    if(isAdmin()) {
+      navigate("/admin/slots");
+    } else {
+      navigate("/slots");
+    }
   }
 
   const handleLogin = async (e) => {

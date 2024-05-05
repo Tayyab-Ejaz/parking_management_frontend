@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Container, Typography } from "@mui/material";
 import LoginPage from "../Pages/LoginPage";
 import SignupPage from "../Pages/SignUpPage";
 import CustomersIndex from "../Pages/Admin/Customers/index";
@@ -69,7 +70,7 @@ const AppRouter = ({}) => {
           }
         />
 
-        <Route path="*" element={<div>404 - Not Found</div>} />
+        <Route path="*" element={<Container py={4}><Typography variant="h4" align={'center'} py={3}>404 - Not Found</Typography></Container>} />
       </Routes>
     </Router>
   );

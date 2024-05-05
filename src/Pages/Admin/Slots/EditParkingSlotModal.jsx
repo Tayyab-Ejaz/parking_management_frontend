@@ -83,15 +83,6 @@ const EditParkingSlotModal = ({ slot, open, onClose, onUpdate }) => {
   }, []);
 
   const handleWorkingHourChange = (day, key, value) => {
-    console.log(day, key, value)
-
-
-    // const updatedParkingSlots = workingHours.map((s) =>
-    //   s.id === updatedSlot.id ? updatedSlot : s
-    // );
-
-
-
     setWorkingHours((prev) =>
       prev.map((wh) => (wh.day === day ? { ...wh, [key]: value } : wh))
     );

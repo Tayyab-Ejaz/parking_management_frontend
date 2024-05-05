@@ -98,7 +98,7 @@ const AdminParkingSlotsIndex = () => {
       navigate("/reservations");
       setResrvationModalOpen(false);
     } catch (error) {
-      showAlert("Failed to book reservation:", error.message);
+      showAlert(`Failed to book reservation`, "error");
     }
   };
 
@@ -121,7 +121,7 @@ const AdminParkingSlotsIndex = () => {
         totalPages: response.data.total_pages,
       });
     } catch (error) {
-      console.error("Error fetching parking slots:", error.message);
+      showAlert("Error fetching parking slots", "error")
     }
   };
 
