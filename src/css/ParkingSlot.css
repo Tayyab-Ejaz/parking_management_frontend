@@ -1,0 +1,76 @@
+/* Basic styling for the filters and parking slot cards */
+.parking-slots-index {
+  display: flex;
+}
+
+.filters {
+  width: 20%;
+  padding: 10px;
+}
+
+.results {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+.parking-slot-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.parking-slot-card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  flex: 1 1 200px;
+}
+
+/* Basic styling for the filter section */
+.filter-section {
+  padding: 10px;
+}
+
+.react-datepicker-popper {
+  transform: translate(0, 249.5px) !important;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  margin: auto;
+}
+
+.list {
+  border: 1px solid #fff;
+  padding: 5px;
+}
+
+.pagination {
+  display: flex;
+  border: 1px solid #fff;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.pagination button {
+  padding: 10px;
+}
+
+.active {
+  background: black;
+  color: #fff;
+  border: 1px solid #fff;
+}
+.pagination {
+  list-style: none;
+}
+.pagination li {
+  background: black;
+  padding: 7px;
+}
+
+.pagination li a {
+  color: white;
+}

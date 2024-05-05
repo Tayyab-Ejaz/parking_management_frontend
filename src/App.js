@@ -1,23 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+
+import AppRouter from "./components/AppRouter";
+import { AuthProvider } from "./Contexts/AuthContext";
+import { AlertProvider } from "./Contexts/AlertContext";
+import GlobalAlert from "./components/GlobalAlert"
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <AuthProvider>
+        <AlertProvider>
+          <GlobalAlert />
+          <AppRouter />
+        </AlertProvider>
+      </AuthProvider>
     </div>
   );
 }
